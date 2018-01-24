@@ -2,7 +2,6 @@ package com.buaa.CliDB.repository;
 
 import com.buaa.CliDB.entity.DiseaseCourse;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
 

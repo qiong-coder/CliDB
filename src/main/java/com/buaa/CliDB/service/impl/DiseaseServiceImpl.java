@@ -44,12 +44,10 @@ public class DiseaseServiceImpl implements DiseaseService {
 
     @Override
     public Disease update(Disease disease) {
-        Optional<Disease> diseaseOptional = diseaseRepository.findById(disease.getId());
+        Disease disease1 = diseaseRepository.findOne(disease.getId());
 
-        if ( !diseaseOptional.isPresent() ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
+        if ( disease1 == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to update the disease cause of not founded");
-
-        Disease disease1 = diseaseOptional.get();
 
         disease = MergeUtils.mergeObjects(disease, disease1);
 
@@ -59,12 +57,12 @@ public class DiseaseServiceImpl implements DiseaseService {
 
     @Override
     public Disease delete(String id) {
-        Optional<Disease> diseaseOptional = diseaseRepository.findById(id);
-        if ( !diseaseOptional.isPresent() ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
+        Disease disease = diseaseRepository.findOne(id);
+        if ( disease == null  ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to delete disease cause of not founded");
         else {
             diseaseRepository.deleteDiseaseById(id);
-            return diseaseOptional.get();
+            return disease;
         }
     }
 }
