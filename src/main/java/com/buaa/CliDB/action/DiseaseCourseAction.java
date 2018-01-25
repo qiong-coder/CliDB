@@ -40,6 +40,13 @@ public class DiseaseCourseAction {
         return new ResponseBuilder(ResponseStatusAndInfos.OK, diseaseCourse);
     }
 
+    @RequestMapping(value = "/{id}/{partId}/", method = RequestMethod.DELETE)
+    public ResponseBuilder delete(@PathVariable String id,
+                                  @PathVariable String partId) {
+        DiseaseCourse diseaseCourse = diseaseCourseService.delete(id,partId);
+        return new ResponseBuilder(ResponseStatusAndInfos.OK, diseaseCourse);
+    }
+
     @RequestMapping(value = "/", method =  RequestMethod.PUT)
     public ResponseBuilder update(@RequestPart(value = "diseaseCourse") DiseaseCourse diseaseCourse) {
         diseaseCourse = diseaseCourseService.update(diseaseCourse);

@@ -73,4 +73,9 @@ public class DiseaseCourseServiceImpl implements DiseaseCourseService {
 
         return diseaseCourse.get();
     }
+
+    @Override
+    public DiseaseCourse delete(String id, String partId) {
+        return null;
+    }
 }

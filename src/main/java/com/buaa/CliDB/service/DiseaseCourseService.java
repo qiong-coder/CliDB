@@ -15,4 +15,6 @@ public interface DiseaseCourseService {
 
     DiseaseCourse delete(String id);
 
+    DiseaseCourse delete(String id, String partId);
+
 }
