@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Part;
 import java.util.List;
-import java.util.Optional;
 
 
 @Service("DiseaseCourseService")
@@ -77,6 +76,25 @@ public class DiseaseCourseServiceImpl implements DiseaseCourseService {
 
     @Override
     public DiseaseCourse delete(String id, String partId) {
-        return null;
+
+        DiseaseCourse diseaseCourse = diseaseCourseRepository.findOne(id);
+
+        if ( diseaseCourse == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(), "failure to delete the disease course's part cause of not founded");
+
+        if ( partId.compareToIgnoreCase("mainAnswers") == 0 ) {
+            diseaseCourse.setMainAnswers(null);
+        } else if ( partId.compareToIgnoreCase("firstAnswers") == 0 ) {
+            diseaseCourse.setFirstAnswers(null);
+        } else if ( partId.compareToIgnoreCase("secondAnswers") == 0 ) {
+            diseaseCourse.setSecondAnswers(null);
+        } else if ( partId.compareToIgnoreCase("thirdAnswers") == 0 ) {
+            diseaseCourse.setThirdAnswers(null);
+        } else if ( partId.compareToIgnoreCase("fourthAnswers") == 0 ) {
+            diseaseCourse.setFourthAnswers(null);
+        } else {
+            throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(), "failure to delete the disease course's part cause of partId is not correct");
+        }
+
+        return diseaseCourseRepository.save(diseaseCourse);
     }
 }

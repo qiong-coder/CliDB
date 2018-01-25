@@ -33,7 +33,12 @@
     + =METHOD= :: GET
     + =URI= :: http://ip:port/CliDB/patient/{doctorId}/
                doctorId为你要抽取的病患所属的医生ID,对应于你添加的时候给的doctorId
-   
+
+*** 删除接口
+    + =METHOD= :: DELETE
+    + =URI= :: http://ip:port/CliDB/patient/{id}/
+               其中di为病患id
+
 * 基本病情
 ** 基本结构体
    #+BEGIN_SRC java
@@ -59,7 +64,10 @@
     + =METHOD= :: GET
     + =URI= :: http://ip:port/CliDB/disease/{patientId}/
                patientId为病患接口获取的病患的id
-                              
+*** 删除接口
+    + =METHOD= :: DELETE
+    + =URI= :: http://ip:port/CliDB/disease/{id}/
+               id为病情id
 * 病程
 ** 基本结构体
    #+BEGIN_SRC java
@@ -74,6 +82,8 @@
     private DiseaseCourseFirstAnswers firstAnswers;
 
     private DiseaseCourseThirdAnswers thirdAnswers;
+
+    private DiseaseCourseSecondAnswers secondAnswers;
 
     private DiseaseCourseFourthAnswers fourthAnswers;
    
@@ -241,6 +251,34 @@
     private String answer23;
     #+END_SRC
 
+    #+BEGIN_SRC java
+    private String answer7;
+
+    private String answer11;
+
+    private String answer6;
+
+    private String answer12;
+
+    private String answer9;
+
+    private String answer8;
+
+    private String answer10;
+
+    private String answer1;
+
+    private String answer0;
+
+    private String answer3;
+
+    private String answer2;
+
+    private String answer5;
+
+    private String answer4;
+    #+END_SRC
+
     DiseaseCourseFourthAnswers:
     #+BEGIN_SRC java
     private String answer7;
@@ -272,7 +310,16 @@
     + =METHOD= :: POST
     + =URI= :: http://ip:port/CliDB/diseaseCourse/
     + =POST_BODY= :: 为上述的基本结构体
-
+*** 删除接口
+    + =MEHOTD= :: DELETE
+    + =URI= :: http://ip:port/CliDB/diseaseCourse/{id}/
+               id为病程id
+*** 删除病程记录
+    + =METHOD= :: DELETE
+    + =URI= :: http://ip:port/CliDB/diseaseCourse/{id}/{partId}
+               id 为病程id
+               partId 为记录的key值，对应到病程结构体中的四个子结构体 (mainAnswers firstAnswers secondAnswers thirdAnswers fourthAnswers).
+               
 * 图片
 ** 上传
   + =URI= :: http://ip:port/CliDB/image/{patientId}/{diseaseId}/

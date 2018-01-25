@@ -21,5 +21,7 @@ public class DiseaseCourse {
 
     private DiseaseCourseThirdAnswers thirdAnswers;
 
+    private DiseaseCourseSecondAnswers secondAnswers;
+
     private DiseaseCourseFourthAnswers fourthAnswers;
 }
