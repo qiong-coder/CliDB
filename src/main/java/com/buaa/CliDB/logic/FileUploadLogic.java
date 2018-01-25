@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface FileUploadLogic extends ServletContextAware {
 
-    List<String> save(String patientId, String index, Part[] files);
+    List<String> save(String patientId, String diseaseId, Part[] files);
 
-    void delete(String patientId, String index);
+    void delete(String patientId, String diseaseId);
 
 }

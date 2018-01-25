@@ -2,8 +2,285 @@
 
 * 患者信息接口
 ** 基本结构体
+   #+BEGIN_SRC java
+   private String id;
+
+   private String doctorId; //当前患者对应的医生ID,现在只有一个你可以设置为1
+
+   private String name;
    
+   private Integer age;
+
+   private String sex;
+   
+   private String medicalRecordNum;
+   
+   private String tel;
+   
+   private String email;
+   
+   private String address;
+
+   private String phoneNum;
+   #+END_SRC
+** 接口
+*** 添加接口
+    + =METHOD= ::  POST
+    + =URI= :: http://ip:port/CliDB/patient/
+    + =POST-BODY= :: 为上边给出的结构体,除了id字段(该字段数据库自动生成)!
+
+*** 获取接口
+    + =METHOD= :: GET
+    + =URI= :: http://ip:port/CliDB/patient/{doctorId}/
+               doctorId为你要抽取的病患所属的医生ID,对应于你添加的时候给的doctorId
    
 * 基本病情
+** 基本结构体
+   #+BEGIN_SRC java
+    private String id;
 
+    private String patientId; // 病患的ID,为患者信息结构体中的id字段;
+
+    private String mainSuit;
+
+    private String past;
+
+    private String type;
+
+    private String typeChild;
+   #+END_SRC
+** 接口
+*** 添加接口
+    + =METHOD= :: POST
+    + =URI= :: http://ip:port/CliDB/disease/
+    + =POST-BODY= :: 为上边的病情结构体,除了id字段.
+
+*** 获取接口
+    + =METHOD= :: GET
+    + =URI= :: http://ip:port/CliDB/disease/{patientId}/
+               patientId为病患接口获取的病患的id
+                              
 * 病程
+** 基本结构体
+   #+BEGIN_SRC java
+    private String id;
+
+    private String diseaseId;
+
+    private String index; //用来排序,第几次的病程
+
+    private DiseaseCourseMainAnswers mainAnswers;
+
+    private DiseaseCourseFirstAnswers firstAnswers;
+
+    private DiseaseCourseThirdAnswers thirdAnswers;
+
+    private DiseaseCourseFourthAnswers fourthAnswers;
+   
+   #+END_SRC
+   
+   mainAnswers:
+   #+BEGIN_SRC java
+   private String mainAnswer22;
+
+    private String mainAnswer21;
+
+    private String mainAnswer20;
+
+    private List<DiseaseCourseMainAnswer25> mainAnswer25;
+
+    private DiseaseCourseMainAnswer24 mainAnswer24;
+
+    private DiseaseCourseMainAnswer24 mainAnswer23;
+
+    private String mainAnswer9;
+
+    private String mainAnswer28;
+
+    private String mainAnswer8;
+
+    private String mainAnswer27;
+
+    private String mainAnswer7;
+
+    private boolean mainAnswer26_0;
+
+    private boolean mainAnswer26_1;
+
+    private String mainAnswer25_1;
+
+    private String mainAnswer11;
+
+    private String mainAnswer10;
+
+    private String mainAnswer17;
+
+    private String mainAnswer16;
+
+    private String mainAnswer19;
+
+    private String mainAnswer18;
+
+    private String mainAnswer13;
+
+    private String mainAnswer12;
+
+    private String mainAnswer15;
+
+    private String mainAnswer14;
+
+    private String mainAnswer0;
+
+    private String mainAnswer1;
+
+    private String mainAnswer2;
+
+    private DiseaseCourseMainAnswer3 mainAnswer3;
+
+    private String mainAnswer4;
+
+    private String mainAnswer5;
+
+    private String mainAnswer6;
+   #+END_SRC
+
+   MainAnswer25:
+   #+BEGIN_SRC java
+    private String id;
+
+    private String unit;
+
+    private String name;
+
+    private String value;
+   #+END_SRC
+
+
+   MainAnswer24:
+   #+BEGIN_SRC java
+    private String isUsed;
+
+    private String direction;
+
+    private String name;
+
+    private String dose;
+   #+END_SRC
+
+
+   DiseaseCourseMainAnswer3:
+   #+BEGIN_SRC java
+    private String value;
+
+    private String radioIndex;
+    #+END_SRC
+
+    DiseaseCourseFirstAnswers:
+    #+BEGIN_SRC java
+     private String answer1;
+
+    private String answer0;
+
+    private String answer3;
+
+    private String answer2;
+
+    private String answer4;
+    #+END_SRC
+
+    DiseaseCourseThirdAnswers:
+    #+BEGIN_SRC java
+    private String answer7;
+
+    private String answer6;
+
+    private String answer9;
+
+    private String answer24;
+
+    private String answer8;
+
+    private String answer18;
+
+    private String answer17;
+
+    private String answer1;
+
+    private String answer0;
+
+    private String answer19;
+
+    private String answer3;
+
+    private String answer14;
+
+    private String answer2;
+
+    private String answer13;
+
+    private String answer5;
+
+    private String answer16;
+
+    private String answer4;
+
+    private String answer15;
+
+    private String answer11;
+
+    private String answer20;
+
+    private String answer12;
+
+    private String answer21;
+
+    private String answer22;
+
+    private String answer10;
+
+    private String answer23;
+    #+END_SRC
+
+    DiseaseCourseFourthAnswers:
+    #+BEGIN_SRC java
+    private String answer7;
+
+    private String answer6;
+
+    private String answer9;
+
+    private String answer8;
+
+    private String answer1;
+
+    private String answer0;
+
+    private String answer3;
+
+    private String answer2;
+
+    private String answer5;
+
+    private String answer4;
+    #+END_SRC
+** 接口
+*** 获取接口
+    + =METHOD= :: GET
+    + =URI= :: http://ip:port/CliDB/diseaseCourse/{diseaseId}/
+               diseaseId为病情的ID
+*** 添加接口
+    + =METHOD= :: POST
+    + =URI= :: http://ip:port/CliDB/diseaseCourse/
+    + =POST_BODY= :: 为上述的基本结构体
+
+* 图片
+** 上传
+  + =URI= :: http://ip:port/CliDB/image/{patientId}/{diseaseId}/
+  + =METHOD= :: POST
+  + =POST_BODY= :: images 命名的多个文件,以form/ultipart编码的结构体
+
+** 获取图片
+   只需要在上传的图片结果获取的对应的地址前加上 http://ip:port/images/ 即可.
+   例如上传一个图片获取的结果为 /patientId/diseaseId/md5.jpeg, 那么最终的获取的URI为: http://ip:prot/images/patientId/diseaseId/md5.jpeg .
+
+   其中,压缩后的图片地址为 http://ip:prot/images/patientId/diseaseId/md5_compress.jpg , 即[filename]_compress.jpg.

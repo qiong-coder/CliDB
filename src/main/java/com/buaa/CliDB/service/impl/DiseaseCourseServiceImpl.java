@@ -52,12 +52,12 @@ public class DiseaseCourseServiceImpl implements DiseaseCourseService {
 
     @Override
     public DiseaseCourse update(DiseaseCourse diseaseCourse) {
-        Optional<DiseaseCourse> optionalDiseaseCourse = diseaseCourseRepository.findById(diseaseCourse.getId());
+        DiseaseCourse diseaseCourse1 = diseaseCourseRepository.findOne(diseaseCourse.getId());
 
-        if ( !optionalDiseaseCourse.isPresent() ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
+        if ( diseaseCourse1 == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to update the disease course cause of not founded");
 
-        diseaseCourse = MergeUtils.mergeObjects(diseaseCourse, optionalDiseaseCourse.get());
+        diseaseCourse = MergeUtils.mergeObjects(diseaseCourse, diseaseCourse1);
 
         if ( diseaseCourse == null ) return null;
 
@@ -66,12 +66,13 @@ public class DiseaseCourseServiceImpl implements DiseaseCourseService {
 
     @Override
     public DiseaseCourse delete(String id) {
-        Optional<DiseaseCourse> diseaseCourse = diseaseCourseRepository.findById(id);
 
-        if ( diseaseCourse.isPresent() ) diseaseCourseRepository.deleteById(id);
+        DiseaseCourse diseaseCourse = diseaseCourseRepository.findOne(id);
+
+        if ( diseaseCourse != null ) diseaseCourseRepository.delete(id);
         else throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(), "failure to delete the disease course cause of not founded");
 
-        return diseaseCourse.get();
+        return diseaseCourse;
     }
 
     @Override

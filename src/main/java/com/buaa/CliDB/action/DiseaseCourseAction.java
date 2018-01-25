@@ -14,7 +14,7 @@ package com.buaa.CliDB.action;
  import java.util.List;
 
 @RestController
-@RequestMapping(value = "/disease_course")
+@RequestMapping(value = "/diseaseCourse")
 public class DiseaseCourseAction {
 
     private static Logger logger = LoggerFactory.getLogger(DiseaseCourseAction.class);

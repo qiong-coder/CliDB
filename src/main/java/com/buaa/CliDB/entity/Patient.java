@@ -28,7 +28,7 @@ public class Patient {
 
     private String email;
 
-    private String biaddress;
+    private String address;
 
     private String phoneNum;
 

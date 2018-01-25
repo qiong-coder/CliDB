@@ -41,23 +41,21 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient delete(String id) {
-        Optional<Patient> optionalPatient = patientRepository.findById(id);
-        if ( !optionalPatient.isPresent() ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
+        Patient patient = patientRepository.findOne(id);
+        if ( patient == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to delete the patient cause of not founded");
         else {
             patientRepository.deletePatientById(id);
-            return optionalPatient.get();
+            return patient;
         }
     }
 
     @Override
     public Patient update(Patient patient) {
-        Optional<Patient> optionalPatient = patientRepository.findById(patient.getId());
+        Patient patient1 = patientRepository.findOne(patient.getId());
 
-        if ( !optionalPatient.isPresent() ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
+        if ( patient1 == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to update the patient cause of not founded");
-
-        Patient patient1 = optionalPatient.get();
 
         patient = MergeUtils.mergeObjects(patient,patient1);
 
