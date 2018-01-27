@@ -2,6 +2,8 @@ package com.buaa.CliDB.entity;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class DiseaseCourseThirdAnswers {
 
@@ -54,4 +56,6 @@ public class DiseaseCourseThirdAnswers {
     private String answer10;
 
     private String answer23;
+
+    private List<String> images;
 }

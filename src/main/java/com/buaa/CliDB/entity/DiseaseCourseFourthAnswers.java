@@ -1,5 +1,7 @@
 package com.buaa.CliDB.entity;
 
+import java.util.List;
+
 public class DiseaseCourseFourthAnswers {
 
     private String answer7;
@@ -21,5 +23,7 @@ public class DiseaseCourseFourthAnswers {
     private String answer5;
 
     private String answer4;
+
+    private List<String> images;
 
 }

@@ -29,9 +29,9 @@ public class DiseaseCourseMainAnswers {
 
     private String mainAnswer7;
 
-    private boolean mainAnswer26_0;
+    private Boolean mainAnswer26_0;
 
-    private boolean mainAnswer26_1;
+    private Boolean mainAnswer26_1;
 
     private String mainAnswer25_1;
 
@@ -68,5 +68,7 @@ public class DiseaseCourseMainAnswers {
     private String mainAnswer5;
 
     private String mainAnswer6;
+
+    private List<String> images;
 
 }

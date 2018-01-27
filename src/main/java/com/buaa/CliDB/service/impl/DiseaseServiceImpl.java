@@ -25,9 +25,9 @@ public class DiseaseServiceImpl implements DiseaseService {
     @Autowired private DiseaseRepository diseaseRepository;
 
     @Override
-    public List<Disease> list(String patientId) {
+    public List<Disease> list(String patientId, boolean exception) {
         List<Disease> diseases = diseaseRepository.findDiseasesByPatientId(patientId);
-        if ( diseases.isEmpty() ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
+        if ( exception && diseases.isEmpty() ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to find the diseases");
         return diseases;
     }

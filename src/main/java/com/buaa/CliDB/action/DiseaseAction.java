@@ -24,7 +24,7 @@ public class DiseaseAction {
     @RequestMapping(value = "/{patientId}/", method = RequestMethod.GET)
     public ResponseBuilder list(@PathVariable String patientId)
     {
-        List<Disease> diseases = diseaseService.list(patientId);
+        List<Disease> diseases = diseaseService.list(patientId, true);
         return new ResponseBuilder(ResponseStatusAndInfos.OK, diseases);
     }
 

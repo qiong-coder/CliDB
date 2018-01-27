@@ -3,6 +3,7 @@ package com.buaa.CliDB.service.impl;
 import com.buaa.CliDB.entity.Patient;
 import com.buaa.CliDB.exception.KeyDuplicateException;
 import com.buaa.CliDB.exception.NotFoundException;
+import com.buaa.CliDB.repository.DiseaseRepository;
 import com.buaa.CliDB.repository.PatientRepository;
 import com.buaa.CliDB.response.ResponseStatusAndInfos;
 import com.buaa.CliDB.service.PatientService;
@@ -20,9 +21,9 @@ public class PatientServiceImpl implements PatientService {
     @Autowired PatientRepository patientRepository;
 
     @Override
-    public List<Patient> list(String doctorId) {
+    public List<Patient> list(String doctorId, boolean exception) {
         List<Patient> patients = patientRepository.findPatientsByDoctorId(doctorId);
-        if ( patients.isEmpty() ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
+        if ( exception && patients.isEmpty() ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to find patients");
         else return patients;
     }

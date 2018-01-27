@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface PatientService {
 
-    List<Patient> list(String doctorId);
+    List<Patient> list(String doctorId, boolean exception);
 
     Patient add(Patient patient);
 
