@@ -1,5 +1,8 @@
 package com.buaa.CliDB.entity;
 
+import lombok.Data;
+
+@Data
 public class DiseaseCourseMainAnswer24 {
 
     private String isUsed;

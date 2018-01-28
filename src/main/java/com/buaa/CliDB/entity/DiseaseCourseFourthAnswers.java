@@ -1,7 +1,10 @@
 package com.buaa.CliDB.entity;
 
+import lombok.Data;
+
 import java.util.List;
 
+@Data
 public class DiseaseCourseFourthAnswers {
 
     private String answer7;

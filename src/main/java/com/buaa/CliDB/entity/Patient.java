@@ -32,4 +32,6 @@ public class Patient {
 
     private String phoneNum;
 
+    private String newestDiseaseCourseDate;
+
 }

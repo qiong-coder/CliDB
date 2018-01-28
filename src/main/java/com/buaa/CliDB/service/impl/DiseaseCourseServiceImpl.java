@@ -1,11 +1,15 @@
 package com.buaa.CliDB.service.impl;
 
 
+import com.buaa.CliDB.entity.Disease;
 import com.buaa.CliDB.entity.DiseaseCourse;
+import com.buaa.CliDB.entity.Patient;
 import com.buaa.CliDB.exception.KeyDuplicateException;
 import com.buaa.CliDB.exception.NotFoundException;
 import com.buaa.CliDB.logic.FileUploadLogic;
 import com.buaa.CliDB.repository.DiseaseCourseRepository;
+import com.buaa.CliDB.repository.DiseaseRepository;
+import com.buaa.CliDB.repository.PatientRepository;
 import com.buaa.CliDB.response.ResponseStatusAndInfos;
 import com.buaa.CliDB.service.DiseaseCourseService;
 import com.buaa.CliDB.utils.MergeUtils;
@@ -20,6 +24,12 @@ import java.util.List;
 
 @Service("DiseaseCourseService")
 public class DiseaseCourseServiceImpl implements DiseaseCourseService {
+
+    @Autowired
+    PatientRepository patientRepository;
+
+    @Autowired
+    DiseaseRepository diseaseRepository;
 
     @Autowired
     DiseaseCourseRepository diseaseCourseRepository;
@@ -40,8 +50,21 @@ public class DiseaseCourseServiceImpl implements DiseaseCourseService {
 
         diseaseCourse.setIndex(Long.toString(diseaseCourseRepository.countDiseaseCoursesByDiseaseId(diseaseCourse.getDiseaseId())));
 
+        Disease disease = diseaseRepository.findOne(diseaseCourse.getDiseaseId());
+
+        if ( disease == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
+                "failure to insert the disease course cause of disease not founded");
+
+        Patient patient = patientRepository.findOne(disease.getPatientId());
+
+        if ( patient == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
+                "failure to insert the disease course cause of patient not founded");
+
         try {
-            return diseaseCourseRepository.insert(diseaseCourse);
+            diseaseCourse = diseaseCourseRepository.insert(diseaseCourse);
+            patient.setNewestDiseaseCourseDate(diseaseCourse.getMainAnswers().getMainAnswer0());
+            patientRepository.save(patient);
+            return diseaseCourse;
         } catch (DuplicateKeyException e) {
             throw new KeyDuplicateException(ResponseStatusAndInfos.ERROR.getStatus(),
                     "failure to insert the disease course cause of duplicate key");
