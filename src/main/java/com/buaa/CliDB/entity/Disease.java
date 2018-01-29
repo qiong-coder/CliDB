@@ -13,7 +13,7 @@ public class Disease {
 
     private String patientId;
 
-    private String mainDisease;
+    private String nameDisease;
 
     private String mainSuit;
 
