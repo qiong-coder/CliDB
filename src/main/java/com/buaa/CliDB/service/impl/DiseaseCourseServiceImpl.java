@@ -79,7 +79,7 @@ public class DiseaseCourseServiceImpl implements DiseaseCourseService {
         if ( diseaseCourse1 == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to update the disease course cause of not founded");
 
-        diseaseCourse = MergeUtils.mergeObjects(diseaseCourse, diseaseCourse1);
+        diseaseCourse = MergeUtils.mergeObjects(diseaseCourse, diseaseCourse1,DiseaseCourse.class);
 
         if ( diseaseCourse == null ) return null;
 

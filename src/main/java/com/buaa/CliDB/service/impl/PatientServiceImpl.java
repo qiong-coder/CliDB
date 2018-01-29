@@ -10,6 +10,8 @@ import com.buaa.CliDB.service.PatientService;
 import com.buaa.CliDB.utils.MergeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,6 +21,8 @@ import java.util.Optional;
 public class PatientServiceImpl implements PatientService {
 
     @Autowired PatientRepository patientRepository;
+
+    @Autowired MongoTemplate mongoTemplate;
 
     @Override
     public List<Patient> list(String doctorId, boolean exception) {
@@ -58,7 +62,7 @@ public class PatientServiceImpl implements PatientService {
         if ( patient1 == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to update the patient cause of not founded");
 
-        patient = MergeUtils.mergeObjects(patient,patient1);
+        patient = MergeUtils.mergeObjects(patient,patient1,Patient.class);
 
         if ( patient != null ) return patientRepository.save(patient);
         return null;

@@ -48,7 +48,7 @@ public class DiseaseCourseAction {
     }
 
     @RequestMapping(value = "/", method =  RequestMethod.PUT)
-    public ResponseBuilder update(@RequestPart(value = "diseaseCourse") DiseaseCourse diseaseCourse) {
+    public ResponseBuilder update(@RequestBody DiseaseCourse diseaseCourse) {
         diseaseCourse = diseaseCourseService.update(diseaseCourse);
         return new ResponseBuilder(ResponseStatusAndInfos.OK,diseaseCourse);
     }

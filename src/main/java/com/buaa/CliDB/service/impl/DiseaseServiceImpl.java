@@ -49,7 +49,7 @@ public class DiseaseServiceImpl implements DiseaseService {
         if ( disease1 == null ) throw new NotFoundException(ResponseStatusAndInfos.ERROR.getStatus(),
                 "failure to update the disease cause of not founded");
 
-        disease = MergeUtils.mergeObjects(disease, disease1);
+        disease = MergeUtils.mergeObjects(disease, disease1, Disease.class);
 
         if ( disease != null ) return diseaseRepository.save(disease);
         else return null;
