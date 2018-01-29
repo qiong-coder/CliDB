@@ -47,7 +47,7 @@ public class FileUploadLogicImpl implements FileUploadLogic {
 
             try {
                 file.write(saveDir+file.getSubmittedFileName());
-                if ( !ImageCompressUtils.compress(saveDir+file.getSubmittedFileName(), compress_image, 320,240, 0.5f) ) {
+                if ( !ImageCompressUtils.compress(saveDir+file.getSubmittedFileName(), compress_image, 320,240, 1.0f) ) {
                     Files.copy(new File(saveDir+file.getSubmittedFileName()), compress_image);
                 }
             } catch (IOException e) {
