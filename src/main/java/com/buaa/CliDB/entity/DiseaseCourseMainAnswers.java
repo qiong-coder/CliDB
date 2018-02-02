@@ -69,6 +69,10 @@ public class DiseaseCourseMainAnswers {
 
     private String mainAnswer6;
 
+    private String mainAnswer29;
+
+    private String mainAnswer30;
+
     private List<String> images;
 
 }
